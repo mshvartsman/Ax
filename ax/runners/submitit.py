@@ -114,14 +114,12 @@ class SubmitItRunner(Runner):
         return trial_status
 
 
-class SubmitItMetricFetcher(Metric):  
+class SubmitItMetricFetcher(Metric):
     """
-    SubmitIt metric fetcher for ax. TODO fetch intermediate metrics from 
-    Tensorboard or similar instead. 
+    SubmitIt metric fetcher for ax. TODO fetch intermediate metrics from
+    Tensorboard or similar instead.
     """
 
-    def __init__(self, metric_name="metric"):
-        self.metric_name = metric_name
 
     def fetch_trial_data(self, trial: BaseTrial) -> MetricFetchResult:
         """Obtains data via fetching it from ` Ifor a given trial."""
@@ -141,7 +139,7 @@ class SubmitItMetricFetcher(Metric):
             fval = job.result()
             df_dict = {
                 "trial_index": trial.index,
-                "metric_name": self.metric_name,
+                "metric_name": self.name,
                 "arm_name": trial.arm.name,
                 "mean": fval,
                 # Can be set to 0.0 if function is known to be noiseless
